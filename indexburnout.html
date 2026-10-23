@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#027A80">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Burnout Cards">
+<meta name="description" content="Practice flashcards and full script for the Managing Burnout opening and closing.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23027A80'/%3E%3Crect x='14' y='18' width='36' height='28' rx='4' fill='white'/%3E%3Crect x='20' y='26' width='24' height='4' fill='%23027A80'/%3E%3Crect x='20' y='34' width='16' height='4' fill='%23C8973A'/%3E%3C/svg%3E">
+<title>Burnout Talk Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one card at center stage, controls underneath; a second tab holds the full script for read-through. */
+:root{
+  --bg:#F3F7F7; --card:#FFFFFF; --ink:#16201F; --muted:#5B6B6A; --teal:#027A80; --deep:#027A80; --gold:#C8973A; --line:#D3E4E4; --soft:#E6F3F3;
+  --display:'Libre Franklin',Arial,sans-serif; --body:'Source Serif 4',Georgia,serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1716;--card:#16211F;--ink:#E6EFEE;--muted:#93A6A4;--teal:#2EC0C6;--deep:#5AD3D8;--gold:#E0B25E;--line:#26403E;--soft:#1B2C2B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1716;--card:#16211F;--ink:#E6EFEE;--muted:#93A6A4;--teal:#2EC0C6;--deep:#5AD3D8;--gold:#E0B25E;--line:#26403E;--soft:#1B2C2B;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(28px,6vw,40px);line-height:1.05;margin:6px 0 4px;text-wrap:balance}
+.sub{color:var(--muted);font-size:15px;margin:0 0 20px}
+.tabs,.filters{display:flex;gap:8px;flex-wrap:wrap}
+.tabs{margin-bottom:16px;border-bottom:1px solid var(--line)}
+.tab{font-family:var(--display);font-weight:600;font-size:15px;background:none;border:0;color:var(--muted);padding:10px 4px;margin-right:14px;border-bottom:3px solid transparent;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-color:var(--teal)}
+.chip{font-family:var(--display);font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.count{font-family:var(--display);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.prog{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;background:var(--teal);width:0;transition:width .25s}
+.stage{perspective:1400px}
+.card{position:relative;min-height:340px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-top:6px solid var(--teal);border-radius:6px;padding:24px 26px;display:flex;flex-direction:column;overflow:auto}
+.back{transform:rotateY(180deg);border-top-color:var(--gold)}
+.lab{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.back .lab{color:var(--gold)}
+.q{font-family:var(--display);font-weight:800;font-size:clamp(22px,4.6vw,30px);line-height:1.2;margin:auto 0;text-wrap:balance}
+.hint{font-family:var(--display);font-size:12px;color:var(--muted)}
+.pts{margin:14px 0 12px;padding-left:20px;font-size:17px;line-height:1.45}
+.pts li{margin:5px 0}
+.anchor{margin-top:auto;border-top:1px solid var(--line);padding-top:10px;font-style:italic;color:var(--deep);font-size:16px}
+.ctl{display:flex;gap:10px;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
+.btn{font-family:var(--display);font-weight:600;font-size:15px;padding:12px 16px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;flex:1 1 auto;min-width:0}
+.btn.go{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.again{border-color:var(--gold);color:var(--ink)}
+.btn:focus-visible,.chip:focus-visible,.tab:focus-visible,.card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.keys{font-family:var(--display);font-size:12px;color:var(--muted);margin-top:10px}
+.script h2{font-family:var(--display);font-weight:900;font-size:22px;margin:26px 0 6px}
+.cue{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:22px 0 8px;font-family:var(--display)}
+.cue b{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+.cue span{font-weight:800;font-size:18px}
+.cue em{font-size:13px;color:var(--muted)}
+.say{font-size:18px;line-height:1.6;margin:0 0 12px;max-width:65ch}
+.stage-dir{font-family:var(--display);font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding:4px 0 4px 10px;margin:8px 0 14px}
+.done{text-align:center;padding:40px 10px}
+.done b{font-family:var(--display);font-size:24px;display:block;margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){.card,.prog i{transition:none}}
+</style>
+<style>
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font-size:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Wellness Committee · Managing Burnout</div>
+  <h1>Opening and closing, on cards</h1>
+  <p class="sub">Tap a card to flip it. Try saying the points out loud before you look.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab" id="tab-cards" role="tab" aria-selected="true">Flashcards</button>
+    <button class="tab" id="tab-script" role="tab" aria-selected="false">Full script</button>
+  </div>
+
+  <section id="cards-view">
+    <div class="bar">
+      <div class="filters">
+        <button class="chip" data-f="All" aria-pressed="true">All 20</button>
+        <button class="chip" data-f="Opening" aria-pressed="false">Opening</button>
+        <button class="chip" data-f="Closing" aria-pressed="false">Closing</button>
+        <button class="chip" id="shuffle" aria-pressed="false">Shuffle</button>
+      </div>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="prog"><i id="prog"></i></div>
+    <div class="stage"><div class="card" id="card" tabindex="0" role="button" aria-label="Flip card">
+      <div class="face front"><div class="lab" id="f-lab"></div><div class="q" id="f-q"></div><div class="hint">Tap or press space to flip</div></div>
+      <div class="face back"><div class="lab" id="b-lab"></div><ul class="pts" id="b-pts"></ul><div class="anchor" id="b-anc"></div></div>
+    </div></div>
+    <div class="ctl">
+      <button class="btn" id="prev">Back</button>
+      <button class="btn again" id="again">Again</button>
+      <button class="btn go" id="gotit">Got it</button>
+    </div>
+    <div class="keys">Keys: space flips · ← back · → got it · A again</div>
+  </section>
+
+  <section id="script-view" class="script" hidden></section>
+</div>
+
+<script>
+const DATA = {"cards": [{"label": "Opening \u00b7 Welcome", "q": "How do you open? (1 min)", "pts": ["Name, role, wellness committee", "The hour: what it is, how to recognize it, where it comes from, what helps", "4 stations instead of a lecture, 8 minutes each", "Next few minutes: a shared starting point"], "anchor": "\"Good morning, everyone. I'm Sean Johnson.\"", "part": "Opening"}, {"label": "Opening \u00b7 How common", "q": "What are the headline numbers?", "pts": ["APA 2021: 79% reported work-related stress in the past month", "AMA 2025: physician burnout 41.9%, down from 48.2% in 2023", "Other surveys run higher: depends who's counting", "CDC: health workers burned out often or very often, 32% (2018) to 46% (2022)"], "anchor": "\"...depends on who's counting and how they ask.\"", "part": "Opening"}, {"label": "Opening \u00b7 How common", "q": "Classification, risk, and the caveat.", "pts": ["ICD-11: occupational phenomenon, not a medical condition", "Not a DSM-5-TR diagnosis", "2 to 3 times the risk of depression or anxiety", "Caveat: most research is on physicians; treat numbers as a guide"], "anchor": "\"One caveat for this room.\"", "part": "Opening"}, {"label": "Opening \u00b7 How the work is built", "q": "What does the specialty gap show?", "pts": ["Emergency medicine near 50%; infectious disease around 23%", "Family medicine 45%; psychiatry 31.6%", "25+ point gap, similar training", "Points to how jobs are built more than who does them"], "anchor": "\"...how the jobs are built more than who is doing them.\"", "part": "Opening"}, {"label": "Opening \u00b7 How the work is built", "q": "Documentation and the AI scribe study.", "pts": ["About 1 in 5 physicians: 8+ hours a week of after-hours charting", "Unchanged since 2022", "Primary care: 30-minute visit, about 36 minutes of EHR work", "Ambient AI scribes: burnout 51.9% to 38.8% in 30 days (6 health systems)"], "anchor": "\"Changing the structure helps.\"", "part": "Opening"}, {"label": "Opening \u00b7 What it costs", "q": "Absenteeism and presenteeism.", "pts": ["Absenteeism = missing work", "Gallup: burned out very often or always, 63% more likely to take a sick day", "Presenteeism = at work without full concentration, judgment, patience", "Cornell: can cost more than absences"], "anchor": "\"It also shows up as presenteeism.\"", "part": "Opening"}, {"label": "Opening \u00b7 What it costs", "q": "Why is burnout a safety issue?", "pts": ["2022 meta-analysis, about 239,000 physicians", "Roughly double the risk of patient safety incidents", "Blame cultures make it worse: near misses go unreported"], "anchor": "\"In health care, it's also a safety issue.\"", "part": "Opening"}, {"label": "Opening \u00b7 Definition", "q": "Give the definition, word for word.", "pts": ["Chronic, work-related stress", "Physical and emotional exhaustion", "Cynicism", "A diminished sense of personal efficacy"], "anchor": "\"Burnout is a state of chronic, work-related stress that produces...\"", "part": "Opening"}, {"label": "Opening \u00b7 Origin", "q": "Where did the term come from?", "pts": ["Herbert Freudenberger, psychologist, New York free clinics, early 1970s", "\"Burnout\" was already the word there for long-term drug use", "Saw staff, himself included, wearing down the same way", "1974: borrowed it for what the work did to the helpers"], "anchor": "\"...what the work was doing to the helpers.\"", "part": "Opening"}, {"label": "Opening \u00b7 3 dimensions", "q": "Maslach's 3 dimensions.", "pts": ["Emotional exhaustion: rest doesn't fix it", "Cynicism / depersonalization: distance from work, coworkers, patients", "Reduced personal efficacy: doubting work you used to feel confident in"], "anchor": "\"Christina Maslach and her colleagues later identified 3 dimensions.\"", "part": "Opening"}, {"label": "Opening \u00b7 Signs", "q": "The 4 areas where burnout shows up.", "pts": ["Emotional: exhaustion, irritability, dread, emptiness", "Cognitive: concentration, memory, self-doubt cycle", "Behavioral: absences, procrastination, pulling back", "Physical: fatigue, sleep, headaches, stomach, illness", "Skip stress vs. burnout; Station 1 covers it"], "anchor": "\"That overlap is what Station 1 will work through with you.\"", "part": "Opening"}, {"label": "Opening \u00b7 Recovery", "q": "What did Shanafelt's 2026 study find?", "pts": ["Followed physicians whose burnout improved a lot", "Nearly 9 in 10 made an active change, personal or at work", "Very few improved by waiting it out", "Most common personal change: separating self-worth from their role"], "anchor": "\"...it stopped being their whole identity.\"", "part": "Opening"}, {"label": "Opening \u00b7 Meaning", "q": "What did the 3-year meaning study find?", "pts": ["1,200+ frontline health and social care workers", "Having meaning in life: less burnout", "Still searching for meaning: more burnout", "Searching hard with little meaning: highest cynicism", "Optional take-home sheet by the exit"], "anchor": "\"Work can be meaningful without having to carry all the meaning in your life.\"", "part": "Opening"}, {"label": "Opening \u00b7 Getting started", "q": "Ground rules and send-off.", "pts": ["Nothing collected except dot stickers; MBI sheet stays with them", "No one asked to share; how much is up to them", "4 stations, 8 minutes; next number on the call; 4 goes to 1", "Count off 1 to 4"], "anchor": "\"...head to the station with your number.\"", "part": "Opening"}, {"label": "Closing \u00b7 Results", "q": "How do you present the dot-vote results? (5 min)", "pts": ["Collect the chart near the end of the last rotation", "Every group added to it; first time anyone sees the total", "Read the top 2 areas and counts", "Ask: does this match what you expected?", "Ask: what does the top one look like day to day?"], "anchor": "\"It reflects how this group sees the conditions we work in.\"", "part": "Closing"}, {"label": "Closing \u00b7 Next steps", "q": "What happens to the chart?", "pts": ["6 areas come from Maslach and Leiter", "Top 2 go to leadership", "Committee picks one concrete thing in the top area", "Follow-up with everyone within a month"], "anchor": "\"Here's what happens next.\"", "part": "Closing"}, {"label": "Closing \u00b7 Maintaining progress", "q": "How do people keep today's work going?", "pts": ["Re-score the MBI monthly", "Review card goals quarterly; 1 daily stress practice", "1 supportive relationship at work; flag capacity early"], "anchor": "\"A few ways to keep today's work going.\"", "part": "Closing"}, {"label": "Closing \u00b7 Seek help", "q": "When should someone reach out? Name all 6.", "pts": ["Burnout continues despite consistent effort", "Depression or anxiety symptoms", "Thoughts of self-harm or escaping the situation", "Work or home significantly affected", "Substances becoming a main way of coping", "Pulled away from most people"], "anchor": "\"Reaching out for support is part of the plan.\"", "part": "Closing"}, {"label": "Closing \u00b7 Takeaways", "q": "The 6 takeaways.", "pts": ["1. Predictable response to conditions", "2. Validated tools give trackable data", "3. Coping covers thinking, behavior, physical health", "4. Driven by conditions, experienced by individuals", "5. Active changes beat waiting it out", "6. Specific goal on a schedule beats a general intention"], "anchor": "\"Six points to take with you.\"", "part": "Closing"}, {"label": "Closing \u00b7 Close", "q": "How do you end?", "pts": ["Predictable patterns mean it can be addressed", "Conditions can change; the results are a starting point", "Thank everyone", "Date the MBI sheet; re-score in 3 months"], "anchor": "\"...score it again and compare the 2.\"", "part": "Closing"}], "opening": [{"t": "cue", "title": "Welcome", "min": "1 min"}, {"t": "say", "text": "Good morning, everyone. I'm Sean Johnson. I'm a behavioral health clinician here, and I'm on the wellness committee along with the people running the 4 stations around us."}, {"t": "say", "text": "Over the next hour, we're going to look at burnout: what it is, how to recognize it, where it comes from, and what helps. Instead of a lecture, we've set this up as 4 short stations, each run by members of the committee. You'll spend 8 minutes at each one."}, {"t": "say", "text": "I'll take the next few minutes to give us a shared starting point, so each station can go straight into its activity."}, {"t": "cue", "title": "How common burnout is", "min": "1.5 min"}, {"t": "say", "text": "In the American Psychological Association's 2021 Work and Well-being Survey, 79% of U.S. workers reported work-related stress in the month before the survey."}, {"t": "say", "text": "For physicians, the American Medical Association's 2025 data puts burnout at 41.9%, down from 48.2% in 2023. Other national surveys report higher rates, so the exact number depends on who's counting and how they ask. Across health workers more broadly, the CDC found that the share who felt burned out often or very often rose from 32% in 2018 to 46% in 2022."}, {"t": "say", "text": "The World Health Organization includes burnout in the ICD-11 as an occupational phenomenon. It's classified as a workplace issue rather than a medical condition, and the DSM-5-TR doesn't list it as a diagnosis. It still carries real risk: people experiencing burnout are 2 to 3 times more likely to go on to develop clinical depression or an anxiety disorder."}, {"t": "say", "text": "One caveat for this room. Most burnout research is on physicians. Much less of it covers nurses, behavioral health, or support staff, so treat these numbers as a guide."}, {"t": "cue", "title": "How the work is built", "min": "1.5 min"}, {"t": "say", "text": "Burnout rates vary a lot by specialty. In the AMA's 2025 data, emergency medicine is near 50% and infectious disease is around 23%. Family medicine sits at 45%, and psychiatry at 31.6%. A gap of more than 25 points between people with similar training points to how the jobs are built more than to who is doing them."}, {"t": "say", "text": "Documentation is a big part of that structure. About 1 in 5 physicians spends 8 or more hours a week on after-hours charting, and that share hasn't moved since 2022. In primary care, one study found that a 30-minute visit generates about 36 minutes of EHR work."}, {"t": "say", "text": "Changing the structure helps. In a 2025 study across 6 health systems, clinicians who started using ambient AI scribes saw burnout drop from 51.9% to 38.8% within 30 days. Station 2 looks at these workplace conditions in more detail."}, {"t": "cue", "title": "What it costs", "min": "1 min"}, {"t": "say", "text": "Burnout shows up as absenteeism, which is missing work. Gallup found that employees who feel burned out very often or always are 63% more likely to take a sick day. It also shows up as presenteeism, which is being at work without the concentration, judgment, or patience to function at full capacity. Research from Cornell found presenteeism can cost organizations more than absences do."}, {"t": "say", "text": "In health care, it's also a safety issue. A 2022 meta-analysis covering about 239,000 physicians found burnout linked to roughly double the risk of patient safety incidents. Workplaces that respond to mistakes with blame make this worse, because people stop reporting near misses."}, {"t": "cue", "title": "What burnout is", "min": "1.5 min"}, {"t": "say", "text": "Here's the definition we're using today. Burnout is a state of chronic, work-related stress that produces physical and emotional exhaustion, cynicism, and a diminished sense of personal efficacy."}, {"t": "say", "text": "The term comes from Herbert Freudenberger, a psychologist who volunteered at free clinics in New York in the early 1970s. \"Burnout\" was already the word people there used for what long-term drug use did to a person. Freudenberger saw the staff, himself included, wearing down in a similar way, and in 1974 he borrowed the word for what the work was doing to the helpers."}, {"t": "say", "text": "Christina Maslach and her colleagues later identified 3 dimensions. Emotional exhaustion: feeling drained in a way that rest doesn't fix. Cynicism, also called depersonalization: a growing distance from the work, from coworkers, and from the people we serve. And reduced personal efficacy: doubting your ability to do work you used to feel confident in."}, {"t": "cue", "title": "How it shows up", "min": "1 min"}, {"t": "say", "text": "Station 1 will look closely at the difference between stress and burnout, so I'll keep this to the signs. Emotionally: exhaustion, irritability, dread about work, and emptiness where satisfaction used to be. Cognitively: trouble concentrating, memory lapses, and a cycle of self-doubt. Behaviorally: absences, procrastination, and pulling back from coworkers. Physically: fatigue, poor sleep, headaches, stomach issues, and getting sick more often."}, {"t": "say", "text": "These signs rarely appear alone, and some overlap with everyday stress. That overlap is what Station 1 will work through with you."}, {"t": "cue", "title": "What recovery looks like", "min": "1.5 min"}, {"t": "say", "text": "A 2026 study led by Tait Shanafelt followed physicians whose burnout improved substantially and asked them what changed. Nearly 9 in 10 had made an active change, either in their personal life or in how they worked. Very few improved by waiting it out. The most common personal change was separating their sense of self-worth from their role. Their work still mattered to them, but it stopped being their whole identity."}, {"t": "say", "text": "A 3-year study of more than 1,200 frontline health and social care workers found something related. People who felt their lives had meaning reported less burnout. People who were still searching for meaning reported more, and those searching hard while feeling little meaning had the highest cynicism. Work can be meaningful without having to carry all the meaning in your life. There's an optional take-home sheet on this idea by the exit."}, {"t": "cue", "title": "Ground rules and getting started", "min": "1 min"}, {"t": "say", "text": "Two ground rules. First, nothing you write today will be collected, except the dot stickers at Station 2. One station uses a validated burnout measure, and you keep that sheet. Second, no one will be asked to talk about their own situation. How much you share is up to you."}, {"t": "say", "text": "There are 4 stations, 8 minutes each. When you hear the call to rotate, move to the next station number, and Station 4 moves to Station 1. Each station stands on its own, so it doesn't matter where you start. Please count off from 1 to 4, and head to the station with your number."}, {"t": "stage", "text": "Point to each station as you name its number. The timekeeper starts the first rotation once every group has arrived."}], "closing": [{"t": "cue", "title": "The dot-vote results", "min": "5 min"}, {"t": "stage", "text": "Near the end of the last rotation, collect the dot-vote chart from Station 2 and bring it to the front. Keep the total out of view until everyone is back."}, {"t": "say", "text": "Welcome back. Please keep your MBI sheet and your commitment card with you."}, {"t": "say", "text": "This is the chart from Station 2. Every group added to it, and this is the first time anyone is seeing the full results. It reflects how this group sees the conditions we work in."}, {"t": "stage", "text": "Read the top 2 areas and their dot counts out loud. Pause briefly."}, {"t": "say", "text": "Does this match what you expected?"}, {"t": "say", "text": "For the area with the most dots, what does that look like day to day?"}, {"t": "stage", "text": "Take 2 or 3 responses, about 3 minutes total. Thank each person who speaks."}, {"t": "say", "text": "Here's what happens next. These 6 areas come from Maslach and Leiter's research on the organizational conditions that drive burnout. The committee will bring the top 2 to leadership and choose one concrete thing within the top area to work on. We'll follow up with everyone within a month."}, {"t": "cue", "title": "Maintaining progress", "min": "1 min"}, {"t": "say", "text": "A few ways to keep today's work going. Re-score the MBI every month or so. Review the goals on your commitment card every quarter, and keep one stress management practice going daily. Build at least one supportive relationship at work, and let leadership know early when your capacity is stretched."}, {"t": "cue", "title": "When to seek help", "min": "1.5 min"}, {"t": "say", "text": "Individual strategies help, and they also have limits. Consider reaching out for professional support if burnout continues despite consistent effort, if symptoms of depression or anxiety are showing up, or if you're having thoughts of harming yourself or of escaping the situation. The same goes if work or home life is significantly affected, if alcohol or other substances have become a main way of coping, or if you've pulled away from most of the people in your life."}, {"t": "say", "text": "The back of your commitment card lists the Employee Assistance Program, the NAMI HelpLine, the San Diego Access and Crisis Line, and 988. Reaching out for support is part of the plan."}, {"t": "cue", "title": "Six takeaways", "min": "1.5 min"}, {"t": "say", "text": "Six points to take with you."}, {"t": "say", "text": "1. Burnout is a predictable response to sustained conditions. It reflects the work environment, and it says little about personal weakness."}, {"t": "say", "text": "2. Validated tools like the MBI give you data you can track over time."}, {"t": "say", "text": "3. Effective coping addresses how you think, what you do, and your physical health, all together."}, {"t": "say", "text": "4. Burnout is driven by workplace conditions and experienced by individuals. That's why the dot-vote chart matters."}, {"t": "say", "text": "5. Recovery usually comes from active changes, at work or in your personal life. Waiting it out rarely works."}, {"t": "say", "text": "6. A specific goal, reviewed on a schedule, works better than a general intention. That's the SMART goal and PDSA cycle from Station 4."}, {"t": "cue", "title": "Close", "min": "1 min"}, {"t": "say", "text": "Burnout is common in this work, and because it follows predictable patterns, it can be addressed. The conditions behind it can change, and today's results give the committee a place to start."}, {"t": "say", "text": "Thank you for being here and for taking part."}, {"t": "say", "text": "Before you go, write today's date on your MBI sheet and keep it somewhere you'll find it. In 3 months, score it again and compare the 2."}, {"t": "stage", "text": "Point out the take-home sheets on the way out. Committee members stay about 5 minutes after to photograph the chart."}]};
+let filter = 'All', shuffled = false, order = [], pos = 0, known = new Set();
+try { known = new Set(JSON.parse(localStorage.getItem('sean-fc-known') || '[]')); } catch (e) {}
+const save = () => { try { localStorage.setItem('sean-fc-known', JSON.stringify([...known])); } catch (e) {} };
+const $ = id => document.getElementById(id);
+
+function build() {
+  order = DATA.cards.map((c, i) => i).filter(i => filter === 'All' || DATA.cards[i].part === filter);
+  const left = order.filter(i => !known.has(i));
+  order = left.length ? left : order;
+  if (shuffled) for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+  pos = 0; show();
+}
+function show() {
+  const card = $('card'); card.classList.remove('flip');
+  const total = DATA.cards.filter(c => filter === 'All' || c.part === filter).length;
+  const doneN = DATA.cards.filter((c, i) => (filter === 'All' || c.part === filter) && known.has(i)).length;
+  $('count').textContent = doneN + ' of ' + total + ' down';
+  $('prog').style.width = (total ? doneN / total * 100 : 0) + '%';
+  if (pos >= order.length) {
+    $('f-lab').textContent = 'Round done';
+    $('f-q').innerHTML = 'All cards in this set are done. Tap “Again” to start the set over.';
+    $('b-lab').textContent = ''; $('b-pts').innerHTML = ''; $('b-anc').textContent = '';
+    return;
+  }
+  const i = order[pos], c = DATA.cards[i];
+  $('f-lab').textContent = c.label + ' · #' + (i + 1);
+  $('f-q').textContent = c.q;
+  $('b-lab').textContent = c.label;
+  $('b-pts').innerHTML = c.pts.map(p => '<li>' + esc(p) + '</li>').join('');
+  $('b-anc').textContent = c.anchor;
+}
+const esc = s => s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+function flip() { if (pos < order.length) $('card').classList.toggle('flip'); }
+function got() { if (pos >= order.length) return; known.add(order[pos]); save(); pos++; show(); }
+function again() {
+  if (pos >= order.length) { DATA.cards.forEach((c, i) => { if (filter === 'All' || c.part === filter) known.delete(i); }); save(); build(); return; }
+  const i = order.splice(pos, 1)[0]; order.push(i); show();
+}
+function prev() { if (pos > 0) { pos--; show(); } }
+
+$('card').addEventListener('click', flip);
+$('gotit').addEventListener('click', got);
+$('again').addEventListener('click', again);
+$('prev').addEventListener('click', prev);
+document.querySelectorAll('.chip[data-f]').forEach(b => b.addEventListener('click', () => {
+  filter = b.dataset.f; document.querySelectorAll('.chip[data-f]').forEach(x => x.setAttribute('aria-pressed', x === b)); build();
+}));
+$('shuffle').addEventListener('click', e => { shuffled = !shuffled; e.currentTarget.setAttribute('aria-pressed', shuffled); build(); });
+document.addEventListener('keydown', e => {
+  if (!$('script-view').hidden) return;
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === 'ArrowRight') got(); else if (e.key === 'ArrowLeft') prev(); else if (e.key.toLowerCase() === 'a') again();
+});
+
+function renderScript() {
+  const part = (title, blocks) => '<h2>' + title + '</h2>' + blocks.map(b =>
+    b.t === 'cue' ? '<div class="cue"><span>' + esc(b.title) + '</span><em>about ' + b.min + '</em></div>'
+    : b.t === 'stage' ? '<div class="stage-dir">' + esc(b.text) + '</div>' : '<p class="say">' + esc(b.text) + '</p>').join('');
+  $('script-view').innerHTML = part('Opening · about 10 minutes', DATA.opening) + part('Closing · about 10 minutes', DATA.closing);
+}
+function tab(which) {
+  $('tab-cards').setAttribute('aria-selected', which === 'cards'); $('tab-script').setAttribute('aria-selected', which === 'script');
+  $('cards-view').hidden = which !== 'cards'; $('script-view').hidden = which !== 'script';
+}
+$('tab-cards').addEventListener('click', () => tab('cards'));
+$('tab-script').addEventListener('click', () => tab('script'));
+renderScript(); build();
+</script>
+</body>
+</html>
